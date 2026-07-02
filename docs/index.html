@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sugarboard — Réinstaller le firmware</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif;
+           max-width: 640px; margin: 0 auto; padding: 24px; line-height: 1.55; }
+    h1 { font-size: 1.5rem; }
+    .card { border: 1px solid #8883; border-radius: 12px; padding: 18px 20px; margin: 18px 0; }
+    ol { padding-left: 1.2em; }
+    .warn { background: #ffb0; border-color: #fb08; }
+    .ok { color: #2a8a2a; font-weight: 600; }
+    .bad { color: #c33; font-weight: 600; }
+    code { background: #8882; padding: 1px 5px; border-radius: 5px; }
+    esp-web-install-button { display: inline-block; margin-top: 6px; }
+    footer { margin-top: 28px; font-size: .85rem; opacity: .7; }
+  </style>
+</head>
+<body>
+  <h1>Sugarboard — Réinstaller le firmware</h1>
+  <p>Cet outil réinstalle la dernière version du firmware (<strong>v513</strong>) directement depuis le navigateur, via le câble USB. À utiliser si l'appareil est bloqué (ERR LOGIN, écran figé) ou pour le remettre à neuf.</p>
+
+  <div class="card warn">
+    <strong>⚠️ Navigateur requis :</strong> <strong>Google Chrome</strong> ou <strong>Microsoft Edge</strong>, sur <strong>ordinateur (Mac / Windows)</strong> ou <strong>téléphone Android</strong>.<br>
+    ❌ Ne fonctionne pas sur <strong>iPhone / iPad</strong> ni sur <strong>Safari / Firefox</strong>.
+  </div>
+
+  <div class="card">
+    <ol>
+      <li>Branche le Sugarboard à l'ordinateur avec un câble USB (câble de <strong>données</strong>, pas seulement de charge).</li>
+      <li>Clique sur <strong>« Installer / Flasher »</strong> ci-dessous.</li>
+      <li>Dans la fenêtre qui s'ouvre, choisis le port série (souvent <code>usbserial</code> ou <code>USB Serial</code>), puis <strong>Connecter</strong>.</li>
+      <li>Choisis <strong>« Erase device / Effacer »</strong> puis <strong>Installer</strong>. Ne débranche pas pendant l'opération (~1 à 2 min).</li>
+    </ol>
+    <esp-web-install-button manifest="./manifest.json">
+      <button slot="activate">🔌 Installer / Flasher le Sugarboard</button>
+      <span slot="unsupported" class="bad">Ce navigateur n'est pas compatible — ouvre cette page dans Chrome ou Edge.</span>
+      <span slot="not-allowed" class="bad">Accès au port série refusé.</span>
+    </esp-web-install-button>
+  </div>
+
+  <div class="card">
+    <strong>Après l'installation — vérifie l'écran :</strong>
+    <p>Après le logo SUGARBOARD, il doit alterner en boucle <span class="ok">« ←APP »</span> (bleu) et <span class="ok">« WIFI→ »</span> (vert) : c'est l'écran de configuration, l'appareil est vierge et prêt à être appairé dans l'application.</p>
+    <p class="bad">❌ Si tu vois autre chose (chiffre figé, erreur) → relance l'installation.</p>
+  </div>
+
+  <footer>
+    Firmware Sugarboard v513 · installation locale, aucune donnée ne transite par un serveur.
+  </footer>
+</body>
+</html>
