@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sugarboard — Installation</title>
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <script>
+    // Filtre la fenêtre de sélection de port : ne montrer que le Sugarboard (puce
+    // USB QinHeng CH340/CH9102, vendor 0x1A86). ESP Web Tools appelle requestPort()
+    // sans filtre ; on l'enveloppe pour injecter le filtre USB.
+    if (navigator.serial && navigator.serial.requestPort) {
+      const _orig = navigator.serial.requestPort.bind(navigator.serial);
+      navigator.serial.requestPort = (opts) =>
+        _orig({ ...(opts || {}), filters: [{ usbVendorId: 0x1A86 }] });
+    }
+  </script>
   <style>
     :root { color-scheme: light dark; }
     body { font-family: -apple-system, system-ui, Segoe UI, Roboto, sans-serif;
